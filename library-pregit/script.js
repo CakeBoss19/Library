@@ -1,54 +1,4 @@
- // Creates a book tile using objects' properties and values.
-function buildBookTile(book){
- // // variables must be INSIDE function to avoid book tiles overwriting eachother.
-  let grid = document.getElementById('grid-library')
-  let book_div = document.createElement('div');
-  let title = document.createElement('h2')
-  let author = document.createElement('p');
-  let pages = document.createElement('p');
-  let read = document.createElement('p');
-  let span1 = document.createElement('span');
-  let span2 = document.createElement('span');
-  let span3 = document.createElement('span');
-  let span4 = document.createElement('span')
-  let label1 = document.createElement('label');
-  let label2 = document.createElement('label');
-  let input1 = document.createElement('input');
-  let input2 = document.createElement('input');
-  let radio = document.createElement('div');
-
-  grid.appendChild(book_div).classList = 'book-tile';
-  book_div.appendChild(title).classList = 'title';
-    title.textContent = book.title.value;
-  book_div.appendChild(author); 
-    author.textContent = 'By: ';
-  book_div.appendChild(pages);  
-    pages.textContent = 'Pages: ';
-  book_div.appendChild(read);
-    author.appendChild(span1).classList = 'author-span info-span';
-      span1.textContent = book.author.value;
-    pages.appendChild(span2).classList = 'pages-span info-span';
-      span2.textContent = book.pages.value;
-    read.appendChild(span3);     
-      span3.textContent = 'Read? ';
-    read.appendChild(radio).classList = 'radio';
-      radio.appendChild(label1).for = 'read'; 
-      radio.appendChild(span4).classList = 'slider';
-};
-
-/*
-<div id="radio" class="form-grid">
-  <label for="read">Read?</label>
-  <div class="radio">
-    <label for="read">Yes</label>
-    <input type="radio" value="yes" name="read" id="read-yes" checked>
-    <label for="read">No</label>
-    <input type="radio" value="no" name="read" id="read-no">
-  </div>
-</div>
-*/
-
- // Set Global Variables
+// Set Global Variables
 const form_container = document.querySelector('.form_container');
 const form = document.getElementById('form');
 const form_btn = document.querySelector('#form-btn');
@@ -56,36 +6,63 @@ const submit_btn = document.querySelector('#submit');
 const cancel_btn = document.querySelector('#cancel-form');
 const input_focus = document.querySelector('input[id="title"]');
 const buttons = document.querySelectorAll('button');
+const table_grid = document.getElementById('table-grid');
 const myLibrary = [];
-console.log(buttons);
 
-buttons.forEach((button) => {
-  button.prototy;
-})
+// Creates p elements within a div to display information
+function buildTile(obj){
+ let table_div = document.createElement('div');
+ let title = document.createElement('p');
+ let author = document.createElement('p');
+ let pageNum = document.createElement('p');
+ let read = document.createElement('p');
+ let omit = document.createElement('p');
+ table_div.append(title, author, pageNum, read, omit);
+ let nodes = table_div.childNodes; // creates a nodeList of each p element created and appended
+ giveValues(obj, nodes);
+ table_grid.appendChild(table_div).classList = 'table-div';
+};
 
+// Attaches the information from the object onto it's DOM element
+function giveValues(obj, arr){
+  for(i = 0; i < arr.length; i++){
+   let key = Object.keys(obj)[i];
+   let keyValue = Object.values(obj)[i];
+   arr[i].classList = `table table-${key}`; // Each created p tag gets a class referencing Object.property being displayed
+   arr[i].textContent = keyValue; // each p tag displays as textContent the properties: values;
+   if(key === undefined){
+    console.log(Object.keys(obj)[4]);
+    arr[i].classList = `table table-remove`;
+   };
+  }; return 
+};
 
  // Book Object Contructor
-function Book(title, author, pages){
+function Book(title, author, page, read){
   this.title = title,
   this.author = author,
-  this.pages = pages;
+  this.number = page,
+  this.read = read;
 };
 
  // Adds new Book object to myLibrary array
-function addBookToLibrary(arr){
-  let book = new Book(arr[1], arr[2], arr[3]);
-  myLibrary.forEach((obj) => {
-    if(book === obj){
-      return
-    } else {}
-  })
-  myLibrary.push(book);
-  return;
+function addBookToLibrary(obj){
+  deleteDupes(obj);
+  myLibrary.push(obj);
+};
+
+ // If multiple books sharing the same Title are entered, delete old book
+function deleteDupes(obj){
+  for(let i = 0; i < myLibrary.length; i++){
+    if(obj.title === myLibrary[i].title){
+      myLibrary.splice(i, 1);
+    };
+  }; 
 };
 
  // Removes Book object from myLibrary array
-function removeBookFromLibrary(){
-  myLibrary.pop(book);
+function removeBookFromLibrary(obj){
+  myLibrary.pop(obj);
   return;
 };
 
@@ -96,22 +73,45 @@ function toggleForm(){
   return;
 };
 
+ // Clears the existing grid of all elements
+function clearGrid(){
+  let table_divs = document.querySelectorAll('.table-div');
+  table_divs.forEach((element)=>{
+    if(element !== table_divs[0]){
+      element.remove();
+    };
+  }); 
+}; 
+
  // Runs through myLibrary array and displays information
 function displayLibrary(){
-  myLibrary.forEach(book => buildBookTile(book));
-  return;
+  clearGrid();
+  myLibrary.forEach((book) => {
+    buildTile(book);
+  });
 };
 
- // Converts object[property: values;] into an array of just values
+// Returns the value of the checked radio box
+function radioCheck(){
+  let radios = document.getElementsByName('read');
+  for(let i = 0; i < radios.length; i++){
+    if(radios[i].checked){
+      return radios[i].value;
+    };
+  }; 
+};
+
+ // Creates a book object from form inputs
 function getInfo(obj){
   let array = [];
-  for(let i = 0; i < 6; i++){
+  for(let i = 1; i < obj.length; i++){
     array.push(obj[i].value);
-  } return array;
+  };
+  let book = new Book(array[0], array[1], array[2], radioCheck()) // inputs checked radio input's value
+  return book;
 };
 
- // Actions to be taken if the book Title input is left empty
- //  input red warning text, etc.
+ // Appends an empty title input warning
 function inputTitleErr(){
   let label = document.querySelector('label[for="title"]')
   if(label.lastElementChild){return};
@@ -120,7 +120,7 @@ function inputTitleErr(){
   p.textContent = '*title is empty';
 };
 
- // checks to see if warning label exists or not
+ // removes the warning label as you type into the input
 function checkWarning(){
   let label = document.querySelector('label[for="title"]')
   if(label.lastElementChild){
@@ -128,14 +128,16 @@ function checkWarning(){
   } return;
 }
 
-submit_btn.addEventListener('click', () => {
-  let data = getInfo(form.elements);
-  if((data[1] === '' || data[1] === undefined)){ // checks if title was left empty
+submit_btn.addEventListener('click', ()=>{
+  let book = getInfo(form.elements);
+  if((book.title === '' || book.title === undefined)){ // checks if title was left empty
     inputTitleErr();
     return false; // ensures the form  will not be submitted 
   } else {
-    addBookToLibrary(data);
+    addBookToLibrary(book);
   };
   toggleForm();
+  displayLibrary();
   return;
 });
+

@@ -50,7 +50,7 @@ h1{
 
 .form_container{
   width: 100%;
-  height: 80vh;
+  height: 100%;
   display: flex;
   position: fixed;
   visibility: visible;
@@ -180,38 +180,34 @@ section{
   position: relative;
 }
 
-#grid-library{
-  margin: auto;
-  width: 60%;
-  height: auto;
+#table-grid{
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(230px, 1fr));
-  grid-template-rows: repeat(4, 1fr);
-  gap: 25px;
-  padding: 15px;
+  grid-template-rows: 1fr;
+  width: 60%;
+  height: 100%;
+  margin: auto;
 }
 
-.book-tile{
-  /* height: 300px; */
-  border-radius: 6px;
-  border: 1px solid black;
-  padding: 20px;
-  background-color: rgba(223, 191, 223, 0.342);
+.table-div{
   display: flex;
-  flex-direction: column;
-  justify-content: space-evenly;
+  border-bottom: 1px solid black;
 }
 
-.book-tile h2{
-  font-size: 2em;
+.table{
   text-align: center;
 }
 
-.book-tile p{
-  font-size: 1rem;
+.table-title{
+  flex: 3;
 }
 
-span.read{
-  position: relative;
-  top: 9px;
+.table-author{
+  flex: 2;
+}
+
+.table-number,
+.table-read,
+.table-remove{
+  flex: 1;
+  
 }
