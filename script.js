@@ -83,13 +83,6 @@ function deleteDupes(obj){
     };
   }; 
 };
-
- // Removes Book object from myLibrary array
-function removeBookFromLibrary(obj){
-  myLibrary.pop(obj);
-  return;
-};
-
  // Switches form's visibility between 'hidden' and 'visibile'
 function toggleForm(){
   form.reset();
