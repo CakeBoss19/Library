@@ -1,9 +1,15 @@
 # Library
-A javascript project to create library to store information on a growing list of books.
+A javascript project as part of The Odin Project's curriculum.   
 
-Book objects are to be stored in a simple array.
-Functions to be written:
-  -Contructor
-  -Add book to library array
-  -Loop through array -- display each item with all of their properties/values
-  -Remove book from list
+I will create a library to store information on books.
+  Information such as the title, author, number of pages,
+  and whether or not you have read the book.
+
+This project will focus primarily on storing objects and 
+  the different ways to call back to them to get various bits
+  of information. Will include a proper example of prototyping
+  through a delete function.
+  
+I will return periodically to add additional functions as I see fit.
+I hope to make this a fine example of the different skills and uses
+of javascript I've learned and obtained.
