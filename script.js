@@ -69,6 +69,12 @@ function Book(title, author, page, read){
   this.remove = '';
 };
 
+Book.prototype.readToggle = function(){
+  (this.read === 'yes') ? this.read = 'no' : this.read = 'yes';
+  displayLibrary();
+  return;
+};
+
  // Adds new Book object to myLibrary array
 function addBookToLibrary(obj){
   deleteDupes(obj);
