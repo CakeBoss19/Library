@@ -19,22 +19,45 @@ function buildTile(obj){
  let omit = document.createElement('p');
  table_div.append(title, author, pageNum, read, omit);
  let nodes = table_div.childNodes; // creates a nodeList of each p element created and appended
+ console.log(nodes);
  giveValues(obj, nodes);
+ console.log()
  table_grid.appendChild(table_div).classList = 'table-div';
 };
 
-// Attaches the information from the object onto it's DOM element
+// Attaches the information from the book object onto it's DOM element
 function giveValues(obj, arr){
   for(i = 0; i < arr.length; i++){
    let key = Object.keys(obj)[i];
    let keyValue = Object.values(obj)[i];
+   key === 'remove' ? createDeleteButton(arr[i]) : arr[i].textContent = keyValue; // each p tag displays as textContent the properties: values
    arr[i].classList = `table table-${key}`; // Each created p tag gets a class referencing Object.property being displayed
-   arr[i].textContent = keyValue; // each p tag displays as textContent the properties: values;
-   if(key === undefined){
-    console.log(Object.keys(obj)[4]);
-    arr[i].classList = `table table-remove`;
-   };
   }; return 
+};
+
+// Assigns datakeys and the event listeners corresponding to those keys
+function assignDatakeys(){
+  let remove_btns = document.querySelectorAll('.remove-btn');
+  for(let i = 0; i < remove_btns.length; i++){
+    remove_btns[i].dataset.key = `${i}`;
+    remove_btns[i].addEventListener('click', () => {
+      removeBook(remove_btns[i].dataset.key);
+    });
+  };
+};
+
+ // Removes a book from the library array
+function removeBook(index){
+  myLibrary.splice(index, 1);
+  displayLibrary();
+};
+
+ // Appends 'Del' button for each book to DOM
+function createDeleteButton(tag){
+  let button = document.createElement('button');
+  let p = document.createElement('p');
+  tag.appendChild(button).classList = 'remove-btn';
+  button.textContent = 'Del';
 };
 
  // Book Object Contructor
@@ -43,6 +66,7 @@ function Book(title, author, page, read){
   this.author = author,
   this.number = page,
   this.read = read;
+  this.remove = '';
 };
 
  // Adds new Book object to myLibrary array
@@ -89,6 +113,7 @@ function displayLibrary(){
   myLibrary.forEach((book) => {
     buildTile(book);
   });
+  assignDatakeys();
 };
 
 // Returns the value of the checked radio box

@@ -193,6 +193,11 @@ section{
   border-bottom: 1px solid black;
 }
 
+.table-header-div{
+  display: flex;
+  border-bottom: 1px solid black
+}
+
 .table{
   text-align: center;
 }
@@ -209,5 +214,16 @@ section{
 .table-read,
 .table-remove{
   flex: 1;
-  
+}
+
+p.table-remove {
+  position: relative;
+}
+
+.remove-btn {
+  background-color: red;
+  color: black;
+  position: absolute;
+  right: 20px;
+  bottom: -14px;
 }
