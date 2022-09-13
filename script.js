@@ -19,9 +19,7 @@ function buildTile(obj){
  let omit = document.createElement('p');
  table_div.append(title, author, pageNum, read, omit);
  let nodes = table_div.childNodes; // creates a nodeList of each p element created and appended
- console.log(nodes);
  giveValues(obj, nodes);
- console.log()
  table_grid.appendChild(table_div).classList = 'table-div';
 };
 
@@ -30,10 +28,10 @@ function giveValues(obj, arr){
   for(i = 0; i < arr.length; i++){
    let key = Object.keys(obj)[i];
    let keyValue = Object.values(obj)[i];
-   key === 'remove' ? createDeleteButton(arr[i]) : arr[i].textContent = keyValue; // each p tag displays as textContent the properties: values
-   arr[i].classList = `table table-${key}`; // Each created p tag gets a class referencing Object.property being displayed
-  }; return 
-};
+   (key === 'read' || key === 'remove') ? createButton(arr[i], key) : arr[i].textContent = keyValue;
+   arr[i].classList = `table table-${key}`;
+  }; return
+};  
 
 // Assigns datakeys and the event listeners corresponding to those keys
 function assignDatakeys(){
@@ -52,12 +50,16 @@ function removeBook(index){
   displayLibrary();
 };
 
- // Appends 'Del' button for each book to DOM
-function createDeleteButton(tag){
+
+function createButton(tag, key){
   let button = document.createElement('button');
-  let p = document.createElement('p');
-  tag.appendChild(button).classList = 'remove-btn';
-  button.textContent = 'Del';
+  if(key === 'read'){
+    tag.appendChild(button).classList = 'read-btn';
+    button.textContent = 'Read?';
+  } else if(key === 'remove'){
+    tag.appendChild(button).classList = 'remove-btn';
+    button.textContent = 'Del';
+  };
 };
 
  // Book Object Contructor

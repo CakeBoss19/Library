@@ -200,6 +200,15 @@ section{
 
 .table{
   text-align: center;
+  position: relative;
+  display: flex;
+  justify-content: space-around;
+
+}
+
+.table{
+  font-size: auto;
+  height: fit-content;
 }
 
 .table-title{
@@ -216,14 +225,35 @@ section{
   flex: 1;
 }
 
-p.table-remove {
+
+
+.table-remove{
   position: relative;
 }
 
-.remove-btn {
+.remove-btn{
   background-color: red;
   color: black;
+  padding: 8px 6px;
+}
+
+.read-btn{
+  background-color: #05445E;
+  color: white;
+}
+
+.orange{
+  background-color: rgb(255, 145, 0);
+}
+
+.table-read,
+.table-remove{
+  position: relative;
+}
+
+.table-read > button,
+.table-remove > button{
+  margin: 0;
   position: absolute;
-  right: 20px;
-  bottom: -14px;
+  top: -8px;
 }
