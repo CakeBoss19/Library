@@ -28,31 +28,42 @@ function giveValues(obj, arr){
   for(i = 0; i < arr.length; i++){
    let key = Object.keys(obj)[i];
    let keyValue = Object.values(obj)[i];
-   if(keyValue === 'yes' || keyValue === 'no'){keyValue = capitalize(keyValue)};
-   (key === 'remove') ? createButton(arr[i], key) : arr[i].textContent = keyValue;
+   (key === 'remove') ? createButton(arr[i]) : arr[i].textContent = keyValue;
    arr[i].classList = `flex flex-${key}`;
+   (key === 'read') ? createSpan(arr[i], keyValue) : false;
   }; return
 };  
 
-// Capitalizes the first  letter of a word.
-function capitalize(str){
-  arr = str.split('');
-  firstLet = arr[0].toUpperCase();
-  arr.splice(0, 1, firstLet);
-  newString = arr.join('');
-  return newString;
-}
+// Creates a span for the check or X mark 
+function createSpan(node, keyValue){
+  let span = document.createElement('span');
+  node.appendChild(span).classList = `span-${keyValue}`;
+};
 
 // Assigns datakeys and the event listeners corresponding to those keys
 function assignDatakeys(){
   let remove_btns = document.querySelectorAll('.remove-btn');
+  let read_btns = document.querySelectorAll('.flex-read');
   for(let i = 0; i < remove_btns.length; i++){
     remove_btns[i].dataset.key = `${i}`;
     remove_btns[i].addEventListener('click', () => {
       removeBook(remove_btns[i].dataset.key);
     });
   };
+  for(let i = 0; i < read_btns.length; i++){
+    read_btns[i].dataset.key = `${i}`;
+    read_btns[i].addEventListener('click', () => {
+      toggleReadStatus(read_btns[i].dataset.key);
+    });
+  };
 };
+
+// Allows for the 'Read' status on an object to be switched to either no or yes
+function toggleReadStatus(index){
+  (myLibrary[index].read === 'Yes') ? myLibrary[index].read = 'No' : myLibrary[index].read = 'Yes';
+  displayLibrary();
+};
+
 
  // Removes a book from the library array
 function removeBook(index){
@@ -60,16 +71,11 @@ function removeBook(index){
   displayLibrary();
 };
 
-
-function createButton(tag, key){
+// Creates a button 
+function createButton(tag){
   let button = document.createElement('button');
-  if(key === 'read'){
-    tag.appendChild(button).classList = 'read-btn';
-    button.textContent = 'Read?';
-  } else if(key === 'remove'){
-    tag.appendChild(button).classList = 'remove-btn';
+   tag.appendChild(button).classList = 'remove-btn';
     button.textContent = 'Del';
-  };
 };
 
  // Book Object Contructor
@@ -82,6 +88,7 @@ function Book(title, author, page, read){
 };
 
 Book.prototype.readToggle = function(){
+  console.log(this)
   (this.read === 'yes') ? this.read = 'no' : this.read = 'yes';
   displayLibrary();
   return;
@@ -162,7 +169,7 @@ function checkWarning(){
   if(label.lastElementChild){
     label.lastElementChild.remove();
   } return;
-}
+};
 
 submit_btn.addEventListener('click', ()=>{
   let book = getInfo(form.elements);
@@ -176,4 +183,3 @@ submit_btn.addEventListener('click', ()=>{
   displayLibrary();
   return;
 });
-
