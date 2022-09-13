@@ -242,10 +242,6 @@ section{
   color: white;
 }
 
-.orange{
-  background-color: rgb(255, 145, 0);
-}
-
 .table-read,
 .table-remove{
   position: relative;
