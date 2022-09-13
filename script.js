@@ -6,21 +6,21 @@ const submit_btn = document.querySelector('#submit');
 const cancel_btn = document.querySelector('#cancel-form');
 const input_focus = document.querySelector('input[id="title"]');
 const buttons = document.querySelectorAll('button');
-const table_grid = document.getElementById('table-grid');
+const library_grid = document.getElementById('library-grid');
 const myLibrary = [];
 
 // Creates p elements within a div to display information
 function buildTile(obj){
- let table_div = document.createElement('div');
+ let book_div = document.createElement('div');
  let title = document.createElement('p');
  let author = document.createElement('p');
  let pageNum = document.createElement('p');
  let read = document.createElement('p');
  let omit = document.createElement('p');
- table_div.append(title, author, pageNum, read, omit);
- let nodes = table_div.childNodes; // creates a nodeList of each p element created and appended
+ book_div.append(title, author, pageNum, read, omit);
+ let nodes = book_div.childNodes; // creates a nodeList of each p element created and appended
  giveValues(obj, nodes);
- table_grid.appendChild(table_div).classList = 'table-div';
+ library_grid.appendChild(book_div).classList = 'book-div';
 };
 
 // Attaches the information from the book object onto it's DOM element
@@ -28,10 +28,20 @@ function giveValues(obj, arr){
   for(i = 0; i < arr.length; i++){
    let key = Object.keys(obj)[i];
    let keyValue = Object.values(obj)[i];
-   (key === 'read' || key === 'remove') ? createButton(arr[i], key) : arr[i].textContent = keyValue;
-   arr[i].classList = `table table-${key}`;
+   if(keyValue === 'yes' || keyValue === 'no'){keyValue = capitalize(keyValue)};
+   (key === 'remove') ? createButton(arr[i], key) : arr[i].textContent = keyValue;
+   arr[i].classList = `flex flex-${key}`;
   }; return
 };  
+
+// Capitalizes the first  letter of a word.
+function capitalize(str){
+  arr = str.split('');
+  firstLet = arr[0].toUpperCase();
+  arr.splice(0, 1, firstLet);
+  newString = arr.join('');
+  return newString;
+}
 
 // Assigns datakeys and the event listeners corresponding to those keys
 function assignDatakeys(){
@@ -100,9 +110,9 @@ function toggleForm(){
 
  // Clears the existing grid of all elements
 function clearGrid(){
-  let table_divs = document.querySelectorAll('.table-div');
-  table_divs.forEach((element)=>{
-    if(element !== table_divs[0]){
+  let book_divs = document.querySelectorAll('.book-div');
+  book_divs.forEach((element)=>{
+    if(element !== book_divs[0]){
       element.remove();
     };
   }); 

@@ -180,7 +180,7 @@ section{
   position: relative;
 }
 
-#table-grid{
+#library-grid{
   display: grid;
   grid-template-rows: 1fr;
   width: 60%;
@@ -188,46 +188,37 @@ section{
   margin: auto;
 }
 
-.table-div{
+.book-div{
   display: flex;
   border-bottom: 1px solid black;
 }
 
-.table-header-div{
-  display: flex;
-  border-bottom: 1px solid black
-}
-
-.table{
+.flex{
   text-align: center;
   position: relative;
   display: flex;
   justify-content: space-around;
-
-}
-
-.table{
   font-size: auto;
   height: fit-content;
 }
 
-.table-title{
+.flex-title{
   flex: 3;
 }
 
-.table-author{
+.flex-author{
   flex: 2;
 }
 
-.table-number,
-.table-read,
-.table-remove{
+.flex-number,
+.flex-read,
+.flex-remove{
   flex: 1;
 }
 
 
 
-.table-remove{
+.flex-remove{
   position: relative;
 }
 
@@ -246,13 +237,13 @@ section{
   background-color: rgb(255, 145, 0);
 }
 
-.table-read,
-.table-remove{
+.flex-read,
+.flex-remove{
   position: relative;
 }
 
-.table-read > button,
-.table-remove > button{
+.flex-read > button,
+.flex-remove > button{
   margin: 0;
   position: absolute;
   top: -8px;
