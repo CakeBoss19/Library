@@ -244,24 +244,6 @@ section{
   background-color: red;
   color: black;
   padding: 8px 6px;
-<<<<<<< HEAD
-}
-
-.read-btn{
-  background-color: #05445E;
-  color: white;
-}
-
-.table-read,
-.table-remove{
-  position: relative;
-}
-
-.table-read > button,
-.table-remove > button{
-  margin: 0;
-=======
->>>>>>> script-Rework
   position: absolute;
   top: 0;
 }
