@@ -6,21 +6,21 @@ const submit_btn = document.querySelector('#submit');
 const cancel_btn = document.querySelector('#cancel-form');
 const input_focus = document.querySelector('input[id="title"]');
 const buttons = document.querySelectorAll('button');
-const table_grid = document.getElementById('table-grid');
+const library_grid = document.getElementById('library-grid');
 const myLibrary = [];
 
 // Creates p elements within a div to display information
 function buildTile(obj){
- let table_div = document.createElement('div');
+ let book_div = document.createElement('div');
  let title = document.createElement('p');
  let author = document.createElement('p');
  let pageNum = document.createElement('p');
  let read = document.createElement('p');
  let omit = document.createElement('p');
- table_div.append(title, author, pageNum, read, omit);
- let nodes = table_div.childNodes; // creates a nodeList of each p element created and appended
+ book_div.append(title, author, pageNum, read, omit);
+ let nodes = book_div.childNodes; // creates a nodeList of each p element created and appended
  giveValues(obj, nodes);
- table_grid.appendChild(table_div).classList = 'table-div';
+ library_grid.appendChild(book_div).classList = 'book-div';
 };
 
 // Attaches the information from the book object onto it's DOM element
@@ -28,21 +28,42 @@ function giveValues(obj, arr){
   for(i = 0; i < arr.length; i++){
    let key = Object.keys(obj)[i];
    let keyValue = Object.values(obj)[i];
-   (key === 'read' || key === 'remove') ? createButton(arr[i], key) : arr[i].textContent = keyValue;
-   arr[i].classList = `table table-${key}`;
+   (key === 'remove') ? createButton(arr[i]) : arr[i].textContent = keyValue;
+   arr[i].classList = `flex flex-${key}`;
+   (key === 'read') ? createSpan(arr[i], keyValue) : false;
   }; return
 };  
+
+// Creates a span for the check or X mark 
+function createSpan(node, keyValue){
+  let span = document.createElement('span');
+  node.appendChild(span).classList = `span-${keyValue}`;
+};
 
 // Assigns datakeys and the event listeners corresponding to those keys
 function assignDatakeys(){
   let remove_btns = document.querySelectorAll('.remove-btn');
+  let read_btns = document.querySelectorAll('.flex-read');
   for(let i = 0; i < remove_btns.length; i++){
     remove_btns[i].dataset.key = `${i}`;
     remove_btns[i].addEventListener('click', () => {
       removeBook(remove_btns[i].dataset.key);
     });
   };
+  for(let i = 0; i < read_btns.length; i++){
+    read_btns[i].dataset.key = `${i}`;
+    read_btns[i].addEventListener('click', () => {
+      toggleReadStatus(read_btns[i].dataset.key);
+    });
+  };
 };
+
+// Allows for the 'Read' status on an object to be switched to either no or yes
+function toggleReadStatus(index){
+  (myLibrary[index].read === 'Yes') ? myLibrary[index].read = 'No' : myLibrary[index].read = 'Yes';
+  displayLibrary();
+};
+
 
  // Removes a book from the library array
 function removeBook(index){
@@ -50,16 +71,11 @@ function removeBook(index){
   displayLibrary();
 };
 
-
-function createButton(tag, key){
+// Creates a button 
+function createButton(tag){
   let button = document.createElement('button');
-  if(key === 'read'){
-    tag.appendChild(button).classList = 'read-btn';
-    button.textContent = 'Read?';
-  } else if(key === 'remove'){
-    tag.appendChild(button).classList = 'remove-btn';
+   tag.appendChild(button).classList = 'remove-btn';
     button.textContent = 'Del';
-  };
 };
 
  // Book Object Contructor
@@ -72,6 +88,7 @@ function Book(title, author, page, read){
 };
 
 Book.prototype.readToggle = function(){
+  console.log(this)
   (this.read === 'yes') ? this.read = 'no' : this.read = 'yes';
   displayLibrary();
   return;
@@ -100,9 +117,9 @@ function toggleForm(){
 
  // Clears the existing grid of all elements
 function clearGrid(){
-  let table_divs = document.querySelectorAll('.table-div');
-  table_divs.forEach((element)=>{
-    if(element !== table_divs[0]){
+  let book_divs = document.querySelectorAll('.book-div');
+  book_divs.forEach((element)=>{
+    if(element !== book_divs[0]){
       element.remove();
     };
   }); 
@@ -152,7 +169,7 @@ function checkWarning(){
   if(label.lastElementChild){
     label.lastElementChild.remove();
   } return;
-}
+};
 
 submit_btn.addEventListener('click', ()=>{
   let book = getInfo(form.elements);
@@ -166,4 +183,3 @@ submit_btn.addEventListener('click', ()=>{
   displayLibrary();
   return;
 });
-

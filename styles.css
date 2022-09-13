@@ -180,7 +180,7 @@ section{
   position: relative;
 }
 
-#table-grid{
+#library-grid{
   display: grid;
   grid-template-rows: 1fr;
   width: 60%;
@@ -188,46 +188,55 @@ section{
   margin: auto;
 }
 
-.table-div{
+.book-div{
   display: flex;
   border-bottom: 1px solid black;
+  width: 100%;
 }
 
-.table-header-div{
-  display: flex;
-  border-bottom: 1px solid black
-}
-
-.table{
-  text-align: center;
-  position: relative;
-  display: flex;
-  justify-content: space-around;
-
-}
-
-.table{
-  font-size: auto;
-  height: fit-content;
-}
-
-.table-title{
+.header-title{
   flex: 3;
 }
 
-.table-author{
+.header-author{
   flex: 2;
 }
 
-.table-number,
-.table-read,
-.table-remove{
+.header-number,
+.header-read,
+.header-remove{
   flex: 1;
 }
 
+.flex-remove{
+  position: relative;
+}
 
+.flex{
+  margin: 0;
+  padding: 15px;
+  text-align: center;
+  position: relative;
+  display: flex;
+  justify-content: center;
+  height: fit-content;
+}
 
-.table-remove{
+.flex-title{
+  flex: 3;
+}
+
+.flex-author{
+  flex: 2;
+}
+
+.flex-number,
+.flex-read,
+.flex-remove{
+  flex: 1;
+}
+
+.flex-remove{
   position: relative;
 }
 
@@ -235,6 +244,7 @@ section{
   background-color: red;
   color: black;
   padding: 8px 6px;
+<<<<<<< HEAD
 }
 
 .read-btn{
@@ -250,6 +260,23 @@ section{
 .table-read > button,
 .table-remove > button{
   margin: 0;
+=======
+>>>>>>> script-Rework
   position: absolute;
-  top: -8px;
+  top: 0;
+}
+
+.flex-read{
+  gap: 5px;
+  height: 100%;
+  padding: 0;
+  align-items: center;
+}
+
+.span-Yes::after{
+  content: ' \2713';
+}
+
+.span-No::after{
+  content: ' \2715';
 }
