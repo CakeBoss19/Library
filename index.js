@@ -1,7 +1,4 @@
-import produceBookTile from "./valueDistributor";
-
-
-console.log(produceBookTile({a: '1', b: '2', c: '3'}))
+// import { myFunction } from './myModule';
 
 // Set Global Variables
 const form_container = document.querySelector('.form_container');
