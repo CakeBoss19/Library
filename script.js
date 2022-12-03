@@ -87,8 +87,8 @@ function Book(title, author, page, read){
   this.remove = '';
 };
 
+// Alters the value of an object 'read' property, Similar to a setter.
 Book.prototype.readToggle = function(){
-  console.log(this)
   (this.read === 'yes') ? this.read = 'no' : this.read = 'yes';
   displayLibrary();
   return;
@@ -145,7 +145,7 @@ function radioCheck(){
 };
 
  // Creates a book object from form inputs
-function getInfo(obj){
+function createBookObject(obj){
   let array = [];
   for(let i = 1; i < obj.length; i++){
     array.push(obj[i].value);
@@ -171,9 +171,10 @@ function checkWarning(){
   } return;
 };
 
+// Uses the inputs of the attached form to create an object, store it, and display the new Library
 submit_btn.addEventListener('click', ()=>{
-  let book = getInfo(form.elements);
-  if((book.title === '' || book.title === undefined)){ // checks if title was left empty
+  let book = createBookObject(form.elements);
+  if(!book.title) { // checks if title was left empty
     inputTitleErr();
     return false; // ensures the form  will not be submitted 
   } else {

@@ -1,37 +1,6 @@
-import * as Display from './displayController';
+// import { myFunction } from './myModule';
 
-window.addEventListener('load', () => {
-  
-}) 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-/ Set Global Variables
+// Set Global Variables
 const form_container = document.querySelector('.form_container');
 const form = document.getElementById('form');
 const form_btn = document.querySelector('#form-btn');
