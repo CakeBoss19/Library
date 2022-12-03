@@ -1,7 +1,7 @@
-import { book } from './book';
-import { getFormValues } from './formActions'
+// import { book } from './book';
+// import { getFormValues } from './formActions'
 
-const libraryActions = () => {
+const libraryActions = (() => {
 
   const library = [];
 
@@ -11,33 +11,28 @@ const libraryActions = () => {
     return newBookObject;
   }
 
-  // Adds an object to the library;
-  function addBookToLibrary(array) {
-    const newBook = createBookObject(array);
-    library.push(newBook);
-  }
-
-  // Removes an object from the library
-  function removeBookFromLibrary(obj_id) {
-    library.splice(obj_id, 1);
-  }
-
-  // Assign an id number to each object within an array equal to it's corresponding place within
-  function objectIdAssignment(array) {
+  // Assign an id number to each object indicating its place within the array
+  function assignIds(array) {
     for(let i = 0; i < array.length; i++) {
-      array[i].setId(i);
-    }
+      assignedArray[i].setId(i);
+    } return array;
   }
 
-  function getLibrary() {
-    objectIdAssignment(library);
-    return library;
+  return {
+    addBookToLibrary(array) {
+      const newBook = createBookObject(array);
+      library.push(newBook);
+    },
+
+    removeBookFromLibrary(obj_id) {
+      library.splice(obj_id, 1);
+    },
+
+    getLibrary() {
+      const finishedLibrary = assignIds(library);
+      return finishedLibrary;       
+    } 
   }
+})();
 
-};
-
-submitButton.addEventListener('click', () => {
-  let values = getFormValues();
-  addBookToLibrary(values);
-  displayLibrary()
-})
+// export { libraryActions };

@@ -1,19 +1,24 @@
-import { formErrorDisplay } from './displayController'
+import { throwFormError } from './displayController'
 
 // Module for getting and giving form information
 export const Form = (() => {
   const elements = document.getElementById('form').elements;
 
-  function getFormValues() {
-    const array = [];
-    for(let i = 0; i < elements.length; i++) {
-      if(!elements[i].value){
-        formErrorDisplay(elements[i]);
-        return false;
-      } array.push(elements[i].value);
-    }
-    return array;
+  function hasTitle() {
+    return (elements[0].value ? true : false);
   }
 
-  return { getFormValues }
+  return {
+    getFormValues() {
+      if(!hasTitle()) {
+        return false;
+      }
+      const array = [];
+      for(let i = 0; i < elements.length; i++) {
+        array.push(elements[i].value);
+      }
+      return array;
+    },
+
+  }
 })();

@@ -1,4 +1,8 @@
-// import { myFunction } from './myModule';
+import { libraryActions } from './libraryActions'
+
+window.addEventListener('load', () => {
+
+});
 
 // Set Global Variables
 const form_container = document.querySelector('.form_container');

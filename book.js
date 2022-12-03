@@ -17,4 +17,3 @@ const book = (title, author, pageNum) => {
 }
 
 export { book };
-
