@@ -1,7 +1,30 @@
-import produceBookTile from "./valueDistributor";
+const valueAssignment = () => {
+	function buildTile() {
+		let book_div = document.createElement('div');
+		let title = tagMaker('p');
+		let author = tagMaker('p');
+		let pageNum = tagMaker('p');
+		let read = tagMaker('p');
+		let omit = tagMaker('p');
+		book.append(title, author, pageNum, read, omit);
+		return book_div;
+	}
+	function assignValues(domElement, obj) {
+		let nodes = domElement.childNodes;
+		for(let i = 0; i < nodes.length; i++) {
+			let keyValue = Object.values(obj)[i];
+			nodes[i].textContent = keyValue;
+		}
+	};
+	function produceBookTile(obj) {
+		let book = buildTile();
+		assignValues(book, obj);
+		return book;
+	}
 
+	return { produceBookTile };
+};
 
-console.log(produceBookTile({a: '1', b: '2', c: '3'}))
 
 // Set Global Variables
 const form_container = document.querySelector('.form_container');
@@ -15,7 +38,7 @@ const library_grid = document.getElementById('library-grid');
 const myLibrary = [];
 
 // Creates p elements within a div to display information
-function buildTile(obj){
+function buildTile(obj) {
  let book_div = document.createElement('div');
  let title = document.createElement('p');
  let author = document.createElement('p');
