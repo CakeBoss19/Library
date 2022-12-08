@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <script src="./Library/src/index.js" defer></script>
+</head>
+<body>
+  <header>
+    <h1>Library</h1>
+    <button onclick="toggleForm()" id="form-btn">Add Book</button>
+  </header>
+  <section>
+    <div id="library-grid">
+      <div class="book-div">
+        <p class="flex header-title">Title</p>
+        <p class="flex header-author">Author</p>
+        <p class="flex header-number">Number of Pages</p>
+        <p class="flex header-read">Read?</p>
+        <p class="flex header-remove">Remove</p>
+      </div>
+    </div>
+  </section>   
+  <div class="form_container hidden">
+    <form onsubmit="return false" method="post" id="form">
+      <header id="form-header">
+        <h2>Add new book</h2>
+        <button onclick="toggleForm()" id="cancel-form">X</button>
+      </header>
+      <main id="form-main">
+        <div class="form-grid">
+          <label onchange="" for="title">Title:</label>
+          <input oninput="checkWarning()" placeholder="Lord of the Flies" type="text" name="title" id="title">
+        </div>
+
+        <div class="form-grid">
+          <label for="author">Author:</label>
+          <input placeholder="Mary Susan" type="text" name="author" id="author">
+        </div>
+
+        <div class="form-grid">
+          <label for="pages">Num. of Pages:</label>
+          <input placeholder="400" type="number" name="pages" id="pages">
+        </div>
+
+        <div id="radio" class="form-grid">
+          <label for="read">Read?</label>
+          <div class="radio">
+            <label for="read">Yes</label>
+            <input type="radio" value="Yes" name="read" id="read-yes" checked>
+            <label for="read">No</label>
+            <input type="radio" value="No" name="read" id="read-no">
+          </div>
+        </div>
+        <button type="submit" id="submit">Submit</button>
+        <!-- note that return false after function is vital to stop page -->
+      </main>
+    </form>
+  </div>
+</body>
+</html>

@@ -28,7 +28,7 @@ function giveValues(obj, arr){
   for(i = 0; i < arr.length; i++){
    let key = Object.keys(obj)[i];
    let keyValue = Object.values(obj)[i];
-   (key === 'remove') ? createButton(arr[i]) : arr[i].textContent = keyValue;
+   (key === 'omit') ? createButton(arr[i]) : arr[i].textContent = keyValue;
    arr[i].classList = `flex flex-${key}`;
    (key === 'read') ? createSpan(arr[i], keyValue) : false;
   }; return
@@ -173,6 +173,7 @@ function checkWarning(){
 
 // Uses the inputs of the attached form to create an object, store it, and display the new Library
 submit_btn.addEventListener('click', ()=>{
+  console.log(form.elements.title);
   let book = createBookObject(form.elements);
   if(!book.title) { // checks if title was left empty
     inputTitleErr();
