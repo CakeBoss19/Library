@@ -1,10 +1,3 @@
-
-const elements = document.getElementById('form').elements;
-
-function extractValues(elements) {
-  
-}
-
 function checkForErrors(form_elements) {
   form_elements
 }

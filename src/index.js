@@ -1,4 +1,3 @@
-import { getValues } from './formActions';
 import { Library } from './libraryActions';
 import { Display } from './displayController';
 import './style.css';
@@ -6,9 +5,11 @@ import './style.css';
 
  const submitButton = document.getElementById('submit');
  submitButton.addEventListener('click', () => {
-   Form.checkForErrors(form.elements);
-   Library.addBookToLibrary(values);
-   Display.showLibrary();
+  let values = form.elements;
+  Form.validateForm(values); //When pressed, the submit button first validates the form's information,
+                                //ensuring that no invalid responses were entered in to the input fields.
+  Library.submitBook(values); //When the information passes, the object is then created with the new information
+  Display.showNewLibrary(); //To finish it off, it will then reset the page by erasing/hiding the form and updating the display window
  });
 
 const showForm = document.getElementById('form-btn')
@@ -17,7 +18,15 @@ showForm.addEventListener('click', () => {
   console.log(formContainer);
 })
 
+/*
+When pressed, the submit button first validate the forms information,
+ensuring that no invalid responses were entered in to the input fields.
 
+
+When the information passes, the object is then created with the new information
+
+To finish it off, it will then reset the page by erasing/hiding the form and updating the display window
+*/
 
 
 

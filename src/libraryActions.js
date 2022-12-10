@@ -27,8 +27,8 @@ export const Library = (() => {
   }
 
   return {
-    addBookToLibrary(form_elements) {
-      if(!form_elements[0]) {
+    submitBook(elements) {
+      if(!elements[0]) {
         return false;
       }
       const values = getValues(form_elements)
