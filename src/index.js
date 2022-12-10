@@ -16,17 +16,7 @@ const showForm = document.getElementById('form-btn')
 showForm.addEventListener('click', () => {
   const formContainer = document.getElementById('form_container');
   console.log(formContainer);
-})
-
-/*
-When pressed, the submit button first validate the forms information,
-ensuring that no invalid responses were entered in to the input fields.
-
-
-When the information passes, the object is then created with the new information
-
-To finish it off, it will then reset the page by erasing/hiding the form and updating the display window
-*/
+});
 
 
 
