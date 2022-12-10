@@ -5,12 +5,11 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Document</title>
-  <script src="./Library/src/index.js" defer></script>
-</head>
+<script src="./main.js" defer></script></head>
 <body>
   <header>
     <h1>Library</h1>
-    <button onclick="toggleForm()" id="form-btn">Add Book</button>
+    <button id="form-btn">Add Book</button>
   </header>
   <section>
     <div id="library-grid">
@@ -23,7 +22,7 @@
       </div>
     </div>
   </section>   
-  <div class="form_container hidden">
+  <div id="form_container" class="hidden">
     <form onsubmit="return false" method="post" id="form">
       <header id="form-header">
         <h2>Add new book</h2>

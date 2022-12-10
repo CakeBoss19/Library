@@ -1,0 +1,51 @@
+*, *::before, *::after {  /*Makes everything easier to work with*/
+	box-sizing: border-box;
+}
+
+* { /*Allows for custom margins and paddings*/
+	margin: 0;
+	padding: 0;
+	font: inherit;
+}
+
+html { /*sets a default dark mode to the site*/
+	color-scheme: dark light;
+}
+
+body {
+	min-height: 100vh;
+}
+
+img, picture, svg, video { /*Makes sure images are responsive*/
+	display: block;
+	max-width: 100%;
+}
+
+#content {
+	min-width: 100vw;
+	min-height: 100vh;
+}
+
+#form-wrapper {
+	display: flex;
+	height: 100vh;
+	background-color: grey;
+	visibility: visible;
+}
+
+form {
+	width: auto;
+	margin: auto;
+	font-size: 1.2rem;
+	background: rgb(71, 71, 71);
+	padding: 12px;
+	border-radius: 8px;
+}
+
+li {
+	margin-bottom: 1rem;
+	list-style: none;
+	display: flex;
+	flex-direction: column;
+}
+
